@@ -2,33 +2,13 @@ import React from 'react';
 import validator from 'validator';
 import { SubmitHandler } from 'react-hook-form';
 import { api } from '../services/api';
-import { APIError, CustomerProps, Inputs } from '../interfaces/interface';
+import {
+  APIError,
+  ContextProps,
+  CustomerProps,
+  Inputs,
+} from '../interfaces/interface';
 import axios, { AxiosError } from 'axios';
-
-interface ContextProps {
-  loadCustomers(): Promise<void>;
-  deleteCustomer(id: string): Promise<void>;
-  onSubmit: SubmitHandler<Inputs>;
-  setCustomers: React.Dispatch<React.SetStateAction<CustomerProps[]>>;
-  customers: CustomerProps[];
-  errorMessageEmail: string | null;
-  setErrorMessageEmail: React.Dispatch<React.SetStateAction<string | null>>;
-  checkEmailAlreadyExists: (email: string) => boolean;
-  phoneNumber: string;
-  setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
-  setFormSucceeded: React.Dispatch<React.SetStateAction<boolean>>;
-  formSucceeded: boolean;
-  deletedSucceeded: boolean;
-  setDeletedSucceeded: React.Dispatch<React.SetStateAction<boolean>>;
-  updateCustomer(customer: CustomerProps): Promise<void>;
-  updateSucceeded: boolean;
-  setUpdateSucceeded: React.Dispatch<React.SetStateAction<boolean>>;
-  formatPhoneNumber: (inputValue: string) => string;
-  existsEmailUpdate: boolean;
-  invalidEmailUpdate: boolean;
-  isUpdating: boolean;
-  setIsUpdating: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 const FunctionsContext = React.createContext<ContextProps | null>(null);
 
@@ -41,9 +21,6 @@ function FunctionsProvider({ children }: React.PropsWithChildren) {
   const [formSucceeded, setFormSucceeded] = React.useState<boolean>(false);
   const [deletedSucceeded, setDeletedSucceeded] =
     React.useState<boolean>(false);
-
-
-
   const [updateSucceeded, setUpdateSucceeded] = React.useState<boolean>(false);
   const [existsEmailUpdate, setExistsEmailUpdate] =
     React.useState<boolean>(false);
